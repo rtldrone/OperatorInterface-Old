@@ -1,9 +1,9 @@
 /**
  * Script for handling communications between the operator interface and the vehicle controller.
  */
- const CONTROLLER_URL = "ws://192.168.4.1/ws" //WebSocket address of the controller.  This should be known and constant, since the controller is assigning the addresses.
- const CONNECT_RETRY_INTERVAL_MS = 5000 //Number of milliseconds to wait before trying to reconnect to the controller if communications are lost
- const UPDATE_RATE_MS = 250 //Rate to send update packets to the controller.  Care should be taken to ensure this is less than the controller's timeout value
+ const CONTROLLER_URL = "ws://192.168.4.1/ws"; //WebSocket address of the controller.  This should be known and constant, since the controller is assigning the addresses.
+ const CONNECT_RETRY_INTERVAL_MS = 5000; //Number of milliseconds to wait before trying to reconnect to the controller if communications are lost
+ const UPDATE_RATE_MS = 250; //Rate to send update packets to the controller.  Care should be taken to ensure this is less than the controller's timeout value
 
  var hidden; //Key for the Page Visibility API.  The key depends on what browser is being used, so we need to check that and assign it
              //This is used to access whether or not the user has the page visible on the screen, to determine if we should send updates to the controller

@@ -25,12 +25,12 @@
     <body>
         <div class="d-flex h-100">
             <div class="mr-auto">
-                <button type="button" class="btn btn-lg btn-danger btn-block h-100">S<br>T<br>O<br>P</button>
+                <button type="button" class="btn btn-lg btn-danger btn-block h-100" onclick="sendStop()">S<br>T<br>O<br>P</button>
             </div>
             <div class="container-fluid mt-3">
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header">Battery Voltage</div>
                             <div class="card-body">
@@ -38,86 +38,34 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-6">
+                <div class="row">
+                    <div class="col-6 pt-4">
+                        <div class="card">
+                            <div class="card-header">Set Speed</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-10 px-1">
+                                        <input id="speed_setpoint" type="range" min="0" max="10" value="0" role="input-range">
+                                    </div>
+                                    <div class="col-2 px-1">
+                                        <h4 id="speed_setpoint_readout">0</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 pt-2">
+                                        <button type="button" class="btn btn-primary btn-block" onclick="sendSetpoint(getCurrentSliderValue())">Send Command</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="ml-auto">
-                <button type="button" class="btn btn-lg btn-danger btn-block h-100">S<br>T<br>O<br>P</button>
+                <button type="button" class="btn btn-lg btn-danger btn-block h-100" onclick="sendStop()">S<br>T<br>O<br>P</button>
             </div>
-        </div>
-
-<!--            &lt;!&ndash;Upper Stop button&ndash;&gt;-->
-<!--            <div class="row">-->
-<!--                <div class="col-12 sticky-top">-->
-<!--                    <button type="button" class="btn btn-lg btn-danger btn-block" onclick="sendStop()">STOP</button>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash;Battery voltage and speed readout&ndash;&gt;-->
-<!--            <div class="row">-->
-<!--                <div class="col-6 pt-4 px-2">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-header">Voltage</div>-->
-<!--                        <div class="card-body">-->
-<!--                            <h4 class="card-text text-success">12.0 V</h4>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-6 pt-4 px-2">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-header">Actual Speed</div>-->
-<!--                        <div class="card-body">-->
-<!--                            <h4 class="card-text">10.00 MPH</h4>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash;Speed selector&ndash;&gt;-->
-<!--            <div class="row">-->
-<!--                <div class="col-12 pt-4 px-2">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-header">Set Speed Command (MPH)</div>-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-10 px-1">-->
-<!--                                    <input id="speed_setpoint" type="range" min="0" max="10" value="0" role="input-range">-->
-<!--                                </div>-->
-<!--                                <div class="col-2 px-1">-->
-<!--                                    <h4 id="speed_setpoint_readout">0</h4>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-12 pt-2">-->
-<!--                                    <button type="button" class="btn btn-primary btn-block" onclick="sendSetpoint(getCurrentSliderValue())">Send Command</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash;Fault list&ndash;&gt;-->
-<!--            <div class="row">-->
-<!--                <div class="col-12 pt-4 px-2">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-header">Faults</div>-->
-<!--                        <div class="card-body" id="faults_container">-->
-<!--                            &lt;!&ndash;<div class="alert alert-danger">Example fault</div>&ndash;&gt;-->
-<!--                            <h4 class="text-success">No faults.</h4>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash;Lower stop button&ndash;&gt;-->
-<!--            <div class="row">-->
-<!--                <div class="col-12 fixed-bottom">-->
-<!--                    <button type="button" class="btn btn-lg btn-danger btn-block" onclick="sendStop()">STOP</button>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
     </body>
 </html>
