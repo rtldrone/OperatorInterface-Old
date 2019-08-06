@@ -1,6 +1,26 @@
 var setpointSlider;
 var setpointReadout;
+var batteryVoltageIndicator;
+var velocityIndicator;
 var currentFaults = [];
+
+function updateInstruments(batteryVoltage, batteryState, velocity) {
+    batteryVoltageIndicator.html(batteryVoltage.toFixed(2) + " V");
+    if (batteryState === 0) {
+        batteryVoltageIndicator.removeClass("text-danger");
+        batteryVoltageIndicator.removeClass("text-warning");
+        batteryVoltageIndicator.addClass("text-success");
+    } else if (batteryState === 1) {
+        batteryVoltageIndicator.removeClass("text-success");
+        batteryVoltageIndicator.removeClass("text-danger");
+        batteryVoltageIndicator.addClass("text-warning");
+    } else {
+        batteryVoltageIndicator.removeClass("text-success");
+        batteryVoltageIndicator.removeClass("text-warning");
+        batteryVoltageIndicator.addClass("text-danger");
+    }
+    velocityIndicator.html(velocity.toFixed(2) + " MPH");
+}
 
 function updateSlider(value, fromSlider = false) {
     if (!fromSlider) { //Prevent recursive calls when we call this from the slider
@@ -61,6 +81,8 @@ function updateFaults(faultList) {
 $(document).ready(function() {
     setpointSlider = $("#speed_setpoint");
     setpointReadout = $("#speed_setpoint_readout");
+    batteryVoltageIndicator = $("#battery_voltage_indicator");
+    velocityIndicator = $("#velocity_indicator");
 
     var $r = $('input[type="range"]');
 
