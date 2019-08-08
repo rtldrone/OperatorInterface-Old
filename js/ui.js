@@ -26,7 +26,7 @@ function updateSlider(value, fromSlider = false) {
     if (!fromSlider) { //Prevent recursive calls when we call this from the slider
         setpointSlider.val(value).change();
     }
-    setpointReadout.html(value);
+    setpointReadout.html(value.toFixed(1) + " MPH");
 }
 
 function getCurrentSliderValue() {
