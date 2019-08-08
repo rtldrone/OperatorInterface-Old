@@ -28,7 +28,7 @@
     <body>
         <div class="d-flex h-100">
             <div class="mr-auto">
-                <button type="button" class="btn btn-lg btn-danger btn-block h-100" onmousedown="sendStop()">S<br>T<br>O<br>P</button>
+                <button type="button" class="btn btn-lg btn-danger btn-block h-100" onmousedown="onStopButton()">S<br>T<br>O<br>P</button>
             </div>
             <div class="container-fluid mt-3">
                 <!-- Outer container row -->
@@ -83,23 +83,23 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-9">
-                                                <input id="speed_setpoint" type="range" min="0" max="10" value="0" role="input-range">
+                                                <input id="speed_setpoint" type="range" min="0" max="10" value="0" step="0.1" role="input-range">
                                             </div>
                                             <div class="col-3 p-0">
-                                                <h5 id="speed_setpoint_readout">--</h5>
+                                                <h5 id="speed_setpoint_readout">00.0 MPH</h5>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-6">
                                                 <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-primary">Forward</button>
-                                                    <button type="button" class="btn btn-secondary">Reverse</button>
+                                                    <button id="forward_button" type="button" class="btn btn-primary" onclick="onDirectionButton(true)">Forward</button>
+                                                    <button id="reverse_button" type="button" class="btn btn-secondary" onclick="onDirectionButton(false)">Reverse</button>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-success">Jog (Hold)</button>
-                                                    <button type="button" class="btn btn-warning">Lock</button>
+                                                    <button type="button" class="btn btn-success" onmousedown="onJogButton(true)" onmouseup="onJogButton(false)">Jog (Hold)</button>
+                                                    <button type="button" class="btn btn-warning" onclick="onLockButton()">Lock</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                                 <div class="card">
                                     <div class="card-header">Connection Status</div>
                                     <div class="card-body p-0">
-                                        <div class="alert alert-danger text-center m-1" role="alert">Not Connected</div>
+                                        <div id="connection_readout" class="alert alert-danger text-center m-1" role="alert">Not Connected</div>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                 </div>
             </div>
             <div class="ml-auto">
-                <button type="button" class="btn btn-lg btn-danger btn-block h-100" onmousedown="sendStop()">S<br>T<br>O<br>P</button>
+                <button type="button" class="btn btn-lg btn-danger btn-block h-100" onmousedown="onStopButton()">S<br>T<br>O<br>P</button>
             </div>
         </div>
     </body>

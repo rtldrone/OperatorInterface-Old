@@ -26,15 +26,16 @@ var lastSocketState = socket.readyState;
  */
 function sendUpdate() {
     if (socket.readyState != WebSocket.OPEN) { //If the socket is not connected
-        updateFaults([{fault: "No connection to controller", severity: "warning"}]);
+        updateConnectionState(false)
     }
-    if (socket.readyState == WebSocket.OPEN && lastSocketState != WebSocket.OPEN) { //If the socket is now connected but wasn't last time
-        updateFaults([]);
+    if (socket.readyState == WebSocket.OPEN) { //If the socket is now connected but wasn't last time
+        updateConnectionState(true)
     }
     lastSocketState = socket.readyState;
     if (!document[hidden]) {
         try {
             socket.send("U");
+            sendJog();
         } catch {} //Ignore any exceptions, this just means we aren't connected
     }
 }
@@ -57,6 +58,20 @@ function sendSetpoint(setpoint) {
     try {
         socket.send(buf);
     } catch {}
+}
+
+function sendJog() {
+    if (jogHeld) {
+        const buf = new ArrayBuffer(5);
+        const view = new DataView(buf);
+        const setpoint = getCurrentSliderValue(); //TODO possibly limit max jog speed?
+        view.setUint8(0, 74); //74 = ASCII character 'J'
+        view.setFloat32(1, setpoint);
+
+        try {
+            socket.send(buf);
+        } catch {}
+    }
 }
 
 async function onUpdate(event) {
