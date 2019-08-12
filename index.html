@@ -141,7 +141,63 @@
                     <div class="col-6">
                         <div class="card h-100">
                             <div class="card-header">Feature Logging</div>
-                            <div class="card-body"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button id="level_crossing_button" type="button" class="btn btn-secondary btn-block" onmousedown="onLevelCrossingButton(true)" onmouseup="onLevelCrossingButton(false)" onmouseleave="onLevelCrossingButton(false)">Level Crossing</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button id="switch_button" type="button" class="btn btn-secondary btn-block" onmousedown="onSwitchButton(true)" onmouseup="onSwitchButton(false)" onmouseleave="onSwitchButton(false)">Switch</button>
+                                    </div>
+                                </div>
+                                <div class="row pt-4">
+                                    <div class="col-6">
+                                        <button id="flange_applicator_button" type="button" class="btn btn-secondary btn-block" onclick="onFlangeApplicatorButton()">Flange Applicator</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button id="tor_applicator_button" type="button" class="btn btn-secondary btn-block" onclick="onTorApplicatorButton()">TOR Applicator</button>
+                                    </div>
+                                </div>
+                                <div class="row pt-4">
+                                    <div class="col-6">
+                                        <button id="mile_post_button" type="button" class="btn btn-secondary btn-block" onclick="onMilePostButton()">Mile Post</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button id="signal_button" type="button" class="btn btn-secondary btn-block" onclick="onSignalButton()">Signal</button>
+                                    </div>
+                                </div>
+                                <div class="row pt-4">
+                                    <div class="col-6">
+                                        <button id="tunnel_button" type="button" class="btn btn-secondary btn-block" onclick="onTunnelButton()">Tunnel (Toggle)</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button id="bridge_button" type="button" class="btn btn-secondary btn-block" onclick="onBridgeButton()">Bridge (Toggle)</button>
+                                    </div>
+                                </div>
+                                <div class="row pt-4">
+                                    <div class="col-12">
+                                        <button id="highlight_button" type="button" class="btn btn-secondary btn-block" onclick="onHighlightButton()">General Highlight (Toggle)</button>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-8">
+                                        <label>
+                                            <input type="text" class="form-control" placeholder="Enter filename">
+                                        </label>
+                                    </div>
+                                    <div class="col-4">
+                                        <button id="set_file_button" type="button" class="btn btn-primary btn-block">Set File</button>
+                                    </div>
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="col-6">
+                                        <button id="record_button" type="button" class="btn btn-secondary btn-block">Start Recording</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button id="open_console_button" type="button" class="btn btn-primary btn-block">Open Console</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

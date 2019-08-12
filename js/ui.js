@@ -14,6 +14,12 @@ let faultsContainer;
 let faultsCountReadout;
 let forwardButton;
 let reverseButton;
+let levelCrossingButton;
+let switchButton;
+let tunnelButton;
+let bridgeButton;
+let highlightButton;
+let recordButton;
 
 /**
  * True if the current direction for commands is forward, false if reverse
@@ -28,10 +34,79 @@ let currentDirectionForward = true;
 let jogHeld = false;
 
 /**
+ * True if the level crossing button is currently being held, false otherwise
+ * @type {boolean}
+ */
+let levelCrossingHeld = false;
+
+/**
+ * True if the switch button is currently being held, false otherwise
+ * @type {boolean}
+ */
+let switchHeld = false;
+
+/**
+ * True if the flange applicator button was pressed.  Will be set to false once the event is sent to the controller
+ * @type {boolean}
+ */
+let flangeApplicatorEventOccurred = false;
+
+/**
+ * True if the TOR applicator button was pressed.  Will be set to false once the event is sent to the controller
+ * @type {boolean}
+ */
+let torApplicatorEventOccurred = false;
+
+/**
+ * True if the mile post button was pressed.  Will be set to false once the event is sent to the controller
+ * @type {boolean}
+ */
+let milePostEventOccurred = false;
+
+/**
+ * True if the signal button was pressed.  Will be set to false once the event is sent to the controller
+ * @type {boolean}
+ */
+let signalEventOccurred = false;
+
+/**
+ * True if the tunnel button is currently active, false otherwise
+ * @type {boolean}
+ */
+let tunnelActive = false;
+
+/**
+ * True if the bridge button is currently active, false otherwise
+ * @type {boolean}
+ */
+let bridgeActive = false;
+
+/**
+ * True if the highlight button is currently active, false otherwise
+ * @type {boolean}
+ */
+let highlightActive = false;
+
+/**
  * The current fault code from the controller
  * @type {number}
  */
 let currentFaultCode = -1;
+
+/**
+ * Utility function to toggle a button's appearance between primary and secondary
+ * @param button Button object
+ * @param state True for primary, false for secondary
+ */
+function toggleButton(button, state) {
+    if (state) {
+        button.removeClass("btn-secondary");
+        button.addClass("btn-primary");
+    } else {
+        button.removeClass("btn-primary");
+        button.addClass("btn-secondary");
+    }
+}
 
 /**
  * Updates the connection state display
@@ -110,19 +185,9 @@ function onSpeedSlider(value) {
  * @param forward True if the forward button was pressed, false if the reverse button was pressed
  */
 function onDirectionButton(forward) {
-    if (forward) {
-        forwardButton.removeClass("btn-secondary"); //Change the forward button color to primary (blue)
-        forwardButton.addClass("btn-primary");
-        reverseButton.removeClass("btn-primary"); //Change the reverse button color to secondary (gray)
-        reverseButton.addClass("btn-secondary");
-        currentDirectionForward = true;
-    } else {
-        forwardButton.removeClass("btn-primary"); //Change the forward button color to secondary (gray)
-        forwardButton.addClass("btn-secondary");
-        reverseButton.removeClass("btn-secondary"); //Change the reverse button color to primary (blue)
-        reverseButton.addClass("btn-primary");
-        currentDirectionForward = false;
-    }
+    toggleButton(forwardButton, forward);
+    toggleButton(reverseButton, !forward);
+    currentDirectionForward = forward;
 }
 
 /**
@@ -154,6 +219,76 @@ function onLockButton() {
 function onStopButton() {
     jogHeld = false;
     sendStop();
+}
+
+/**
+ * Event handler for when the level crossing button is pressed or released
+ * @param pressed True when the level crossing button is pressed, false when released
+ */
+function onLevelCrossingButton(pressed) {
+    toggleButton(levelCrossingButton, pressed);
+    levelCrossingHeld = pressed;
+}
+
+/**
+ * Event handler for when the switch button is pressed or released
+ * @param pressed True when the switch button is pressed, false when released
+ */
+function onSwitchButton(pressed) {
+    toggleButton(switchButton, pressed);
+    switchHeld = pressed;
+}
+
+/**
+ * Event handler for when the flange applicator button is pressed
+ */
+function onFlangeApplicatorButton() {
+    flangeApplicatorEventOccurred = true;
+}
+
+/**
+ * Event handler for when the TOR applicator button is pressed
+ */
+function onTorApplicatorButton() {
+    torApplicatorEventOccurred = true;
+}
+
+/**
+ * Event handler for when the mile post button is pressed
+ */
+function onMilePostButton() {
+    milePostEventOccurred = true;
+}
+
+/**
+ * Event handler for when the signal button is pressed
+ */
+function onSignalButton() {
+    signalEventOccurred = true;
+}
+
+/**
+ * Event handler for when the tunnel button is pressed
+ */
+function onTunnelButton() {
+    toggleButton(tunnelButton, !tunnelActive);
+    tunnelActive = !tunnelActive;
+}
+
+/**
+ * Event handler for when the bridge button is pressed
+ */
+function onBridgeButton() {
+    toggleButton(bridgeButton, !bridgeActive);
+    bridgeActive = !bridgeActive;
+}
+
+/**
+ * Event handler for when the highlight button is pressed
+ */
+function onHighlightButton() {
+    toggleButton(highlightButton, !highlightActive);
+    highlightActive = !highlightActive;
 }
 
 function genHtmlForFault(faultIndex) {
@@ -213,6 +348,12 @@ $(document).ready(function() {
     connectionStateReadout = $("#connection_state_readout");
     forwardButton = $("#forward_button");
     reverseButton = $("#reverse_button");
+    levelCrossingButton = $("#level_crossing_button");
+    switchButton = $("#switch_button");
+    tunnelButton = $("#tunnel_button");
+    bridgeButton = $("#bridge_button");
+    highlightButton = $("#highlight_button");
+    recordButton = $("#record_button");
 
     faultsContainer = $("#faults_container");
     faultsCountReadout = $("#faults_count_readout");
